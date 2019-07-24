@@ -90,6 +90,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     GPreviewBuilder.from((Activity) context)
                             .setData(list)
                             .setCurrentIndex(index)
+                            .setFullscreen(true)
                             .setType(GPreviewBuilder.IndicatorType.Dot)
                             .start();//启动
                 }

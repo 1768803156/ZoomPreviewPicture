@@ -16,12 +16,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.ImageView;
 
 import com.previewlibrary.R;
-import com.previewlibrary.photoview.PhotoView;
-import com.previewlibrary.view.ImageUtils;
 
+import uk.co.senab2.photoview2.PhotoView;
 
 /**
  * author yangc
@@ -66,7 +64,7 @@ public class SmoothImageView extends PhotoView {
         startTransform = null;
         endTransform = null;
         animTransform = null;
-        ISFUll=false;
+        ISFUll = false;
         if (animator != null) {
             animator.cancel();
             animator.clone();
@@ -80,7 +78,7 @@ public class SmoothImageView extends PhotoView {
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(0xFF000000);
         matrix = new Matrix();
-        setScaleType(ImageView.ScaleType.FIT_CENTER);
+        setScaleType(ScaleType.FIT_CENTER);
     }
 
     public boolean checkMinScale() {
@@ -185,7 +183,7 @@ public class SmoothImageView extends PhotoView {
                             offsetLeftAndRight(offsetX);
                             offsetTopAndBottom(offsetY);
                             float scale = moveScale();
-                            float scaleXY = 1 - scale * 0.1f;
+                            float scaleXY = 1 - scale * 0.5f;
                             setScaleY(scaleXY);
                             setScaleX(scaleXY);
                             isMoved = true;
@@ -217,13 +215,15 @@ public class SmoothImageView extends PhotoView {
                             }
                         }
                         return true;
+                    } else {
+                        System.out.println("sssssssssssss");
                     }
                     break;
                 default: {
 
                 }
             }
-        }else {
+        } else {
             switch (action) {
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
@@ -239,9 +239,9 @@ public class SmoothImageView extends PhotoView {
                         }
                         return true;
                     }
-                    default:{
+                default: {
 
-                    }
+                }
             }
         }
         return super.dispatchTouchEvent(event);
@@ -459,8 +459,8 @@ public class SmoothImageView extends PhotoView {
             Bitmap mBitmap = ((BitmapDrawable) getDrawable()).getBitmap();
             bitmapWidth = mBitmap.getWidth();
             bitmapHeight = mBitmap.getHeight();
-        } else if (getDrawable() instanceof ColorDrawable){
-            ColorDrawable colorDrawable= (ColorDrawable) getDrawable();
+        } else if (getDrawable() instanceof ColorDrawable) {
+            ColorDrawable colorDrawable = (ColorDrawable) getDrawable();
             bitmapWidth = colorDrawable.getIntrinsicWidth();
             bitmapHeight = colorDrawable.getIntrinsicHeight();
         } else {
@@ -476,10 +476,11 @@ public class SmoothImageView extends PhotoView {
         }
 
         startTransform.left = thumbRect.left;
-        if (ISFUll){
+        if (ISFUll) {
             startTransform.top = thumbRect.top;
-        }else {
-            startTransform.top = thumbRect.top - ImageUtils.getStatusBarHeight(getContext().getApplicationContext());
+        } else {
+            //startTransform.top = thumbRect.top - ImageUtils.getStatusBarHeight(getContext().getApplicationContext());
+            startTransform.top = thumbRect.top;
         }
         startTransform.width = thumbRect.width();
         startTransform.height = thumbRect.height();
@@ -563,6 +564,7 @@ public class SmoothImageView extends PhotoView {
     public static void setDuration(int duration) {
         TRANSFORM_DURATION = duration;
     }
+
     /***
      *  设置是否全屏
      * @param isFull true 全屏
