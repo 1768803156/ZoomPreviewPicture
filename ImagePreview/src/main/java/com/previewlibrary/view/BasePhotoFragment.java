@@ -207,7 +207,7 @@ public class BasePhotoFragment extends Fragment {
         if (!isTransPhoto) {
             rootView.setBackgroundColor(Color.BLACK);
         } else {
-            imageView.setMinimumScale(0.6f);
+            imageView.setMinimumScale(1f);
         }
         if (isSingleFling) {
 

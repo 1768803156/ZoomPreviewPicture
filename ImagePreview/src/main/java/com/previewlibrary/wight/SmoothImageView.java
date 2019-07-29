@@ -215,8 +215,6 @@ public class SmoothImageView extends PhotoView {
                             }
                         }
                         return true;
-                    } else {
-                        System.out.println("sssssssssssss");
                     }
                     break;
                 default: {
