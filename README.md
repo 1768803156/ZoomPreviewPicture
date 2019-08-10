@@ -17,5 +17,5 @@
 通过Gradle抓取:
  
 ```grade
-  compile 'com.ycjiang:ImagePreview:2.2.2'
+  implementation 'com.github.1768803156:ZoomPreviewPicture:v1.2'
 ```
